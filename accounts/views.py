@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from accounts.services.access_control import make_agent, remove_agent
 from .permissions import IsPlatformAdmin, IsVendorAdmin
+from django.core.cache import cache
 
 # Create your views here.
 class RegisterViewSet(viewsets.ModelViewSet):
@@ -74,6 +75,7 @@ class VendorViewSet(viewsets.ModelViewSet):
     queryset = Vendor.objects.all()
     serializer_class = VendorSerializer
     permission_classes = [IsAuthenticated]
+    lookup_field = 'slug'
 
     def get_queryset(self):
         # Skip database queries during schema generation
@@ -111,15 +113,30 @@ class VendorViewSet(viewsets.ModelViewSet):
             status=status.HTTP_200_OK
         )
 
-    @action(detail=True, methods=["PATCH"], permission_classes=[IsAuthenticated, IsPlatformAdmin])
+    @action(detail=True, methods=["PATCH", "GET"], permission_classes=[IsAuthenticated, IsPlatformAdmin])
     def get_approved_vendors(self, request):
+   
+        
+        cache_key = 'vendors_approved'
+        cached = cache.get(cache_key)
+        if cached is not None:
+            return Response(cached, status=status.HTTP_200_OK)
+
         approved_vendors = Vendor.objects.filter(approved=True)
         serializer = self.get_serializer(approved_vendors, many=True)
+        cache.set(cache_key, serializer.data, 60 * 15)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
-    @action(detail=True, methods=["PATCH"], permission_classes=[IsAuthenticated, IsPlatformAdmin])
+    @action(detail=True, methods=["PATCH", "GET"], permission_classes=[IsAuthenticated, IsPlatformAdmin])
     def get_pending_vendors(self, request):
+        
+        cache_key = 'vendors_pending'
+        cached = cache.get(cache_key)
+        if cached is not None:
+            return Response(cached, status=status.HTTP_200_OK)
+
         pending_vendors = Vendor.objects.filter(approved=False)
         serializer = self.get_serializer(pending_vendors, many=True)
+        cache.set(cache_key, serializer.data, 60 * 15)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
