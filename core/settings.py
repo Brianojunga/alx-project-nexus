@@ -44,6 +44,10 @@ INSTALLED_APPS = [
     'drf_yasg',
     'django_redis',
     'accounts',  
+    'products',
+    'cart',
+    'payments',
+    'orders',
 ]
 
 MIDDLEWARE = [

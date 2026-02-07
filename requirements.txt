@@ -1,10 +1,13 @@
 asgiref==3.11.0
+certifi==2026.1.4
+charset-normalizer==3.4.4
 Django==6.0.1
 django-redis==6.0.0
 djangorestframework==3.16.1
 djangorestframework_simplejwt==5.5.1
 drf-yasg==1.21.14
 hiredis==3.3.0
+idna==3.11
 inflection==0.5.1
 packaging==26.0
 pillow==12.1.0
@@ -17,7 +20,25 @@ python-dotenv==1.2.1
 pytz==2025.2
 PyYAML==6.0.3
 redis==7.1.0
+requests==2.32.5
 sqlparse==0.5.5
 typing_extensions==4.15.0
 tzdata==2025.3
 uritemplate==4.2.0
+urllib3==2.6.3
+# Development and Testing
+gunicorn==21.2.0
+pytest==7.4.3
+pytest-django==4.7.0
+pytest-cov==4.1.0
+coverage==7.3.2
+black==23.12.0
+flake8==6.1.0
+isort==5.13.2
+pylint==3.0.3
+pylint-django==2.5.5
+bandit==1.7.5
+safety==2.3.5
+radon==6.1
+# Production
+whitenoise==6.6.0
