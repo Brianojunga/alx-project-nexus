@@ -1,0 +1,27 @@
+[MASTER]
+django-settings-module=core.settings
+load-plugins=pylint_django
+
+[MESSAGES CONTROL]
+disable=
+    C0111,  # missing-docstring
+    C0103,  # invalid-name
+    W0612,  # unused-variable
+    R0903,  # too-few-public-methods
+    R0913,  # too-many-arguments
+    R0914,  # too-many-locals
+    W0201,  # attribute-defined-outside-init
+
+[DESIGN]
+max-attributes=10
+max-arguments=8
+max-locals=20
+
+[FORMAT]
+max-line-length=120
+
+[VARIABLES]
+dummy-variables-rgx=_.*
+
+[REPORTS]
+output-format=colorized
