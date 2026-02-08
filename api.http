@@ -1,0 +1,272 @@
+### ALX Project Nexus - API Testing
+### Use with VS Code REST Client extension or similar tools
+### Replace {{base_url}} with http://localhost:8000
+
+@base_url = http://localhost:8000
+admin token
+#@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzcwNTgwMTUzLCJpYXQiOjE3NzA1NzY1NTMsImp0aSI6ImI0MjkyNDlhOTRmMzRiNDJiMmI3NTZiNWIxMGIyY2JkIiwidXNlcl9pZCI6IjEiLCJlbWFpbCI6ImJyaWFub2p1bmdhM0BnbWFpbC5jb20ifQ.gqazcfmEMC-Xqgb6DyMvYp5YV9UZJqb5ZTlTQEH0MfU
+
+
+#user token
+@token= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzcwNTc5NzU0LCJpYXQiOjE3NzA1NzYxNTQsImp0aSI6Ijg3MDBlYjBlZmIwMjQ0MjFiMmRmNTk5NDdlYjNjNzA3IiwidXNlcl9pZCI6IjMiLCJlbWFpbCI6ImN1c3RvbWVyQGV4YW1wbGUuY29tIn0.pHdTYuRFcJg8nTvm0lCu0iGuae2zxzZsMTX37rOd95k
+@vendor_slug = techstore-inc
+
+### ============================================
+### ACCOUNTS & AUTHENTICATION
+### ============================================
+
+### 1. Register a new user
+POST {{base_url}}/api/accounts/register/
+Content-Type: application/json
+
+{
+  "email": "customer@example.com",
+  "password": "SecurePass123!",
+  "first_name": "John",
+  "last_name": "Doe"
+}
+
+
+### 2. Login user (get JWT token)
+POST {{base_url}}/api/accounts/token/
+Content-Type: application/json
+
+{
+  "email": "customer@example.com",
+  "password": "SecurePass123!"
+}
+
+### Login superuser (get JWT token)
+POST {{base_url}}/api/accounts/token/
+Content-Type: application/json
+
+
+{
+  "email": "brianojunga3@gmail.com",
+  "password": "@Myhouse12"
+}
+
+###
+
+### 3. Get current user profile
+GET {{base_url}}/api/accounts/register/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### 4. Register a vendor account
+POST {{base_url}}/api/accounts/vendors/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "company_name": "TechStore Inc",
+  "address": "123 Business Street, Capital City",
+  "phone_number": "+234801234567",
+  "email": "vendor@techstore.com"
+}
+
+### 5. Get vendor profile
+GET {{base_url}}/api/accounts/vendors
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+
+###
+PATCH {{base_url}}/api/accounts/vendors/6/approve_vendor/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### ============================================
+### PRODUCTS
+### ============================================
+
+### 6. Get all products
+GET {{base_url}}/api/vendors/{{vendor_slug}}/products/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### 7. Get product categories
+GET {{base_url}}/api/vendors/{{vendor_slug}}/categories/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### 8. Create a product category (as vendor)
+POST {{base_url}}/api/vendors/{{vendor_slug}}/categories/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Laptops",
+  "vendor": 1
+}
+
+### 9. Create a product (as vendor)
+POST {{base_url}}/api/vendors/{{vendor_slug}}/products/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "MacBook Pro 16",
+  "description": "High-performance laptop for professionals",
+  "price": "2499.99",
+  "category": 1,
+  "vendor": 6,
+  "discount": "10",
+  "quantity": 50
+}
+
+### 10. Get single product
+GET {{base_url}}/api/vendors/{{vendor_slug}}/products/1/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+
+### ============================================
+### SHOPPING CART
+### ============================================
+
+### 12. Get or create cart
+GET {{base_url}}/api/cart/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### 13. Add product to cart
+POST {{base_url}}/api/cart/items/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "product": 1,
+  "quantity": 2,
+  "vendor": 1
+}
+
+### 14. Get cart with items
+GET {{base_url}}/api/cart/items/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### 15. Update cart item quantity
+PATCH {{base_url}}/api/cart/items/1/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "quantity": 3
+}
+
+### 16. Remove item from cart
+DELETE {{base_url}}/api/cart/items/1/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### 17. Calculate cart total
+GET {{base_url}}/api/cart/total/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### ============================================
+### ORDERS
+### ============================================
+
+### 18. Create an order from cart
+POST {{base_url}}/api/orders/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "vendor": 1,
+  "cart_id": 1
+}
+
+### 19. Get user's orders
+GET {{base_url}}/api/orders/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### 20. Get order details
+GET {{base_url}}/api/orders/550e8400-e29b-41d4-a716-446655440000/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### 21. Get order items
+GET {{base_url}}/api/orders/550e8400-e29b-41d4-a716-446655440000/items/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### 22. Update order status (admin/vendor only)
+PATCH {{base_url}}/api/orders/550e8400-e29b-41d4-a716-446655440000/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "status": "paid"
+}
+
+### ============================================
+### PAYMENTS
+### ============================================
+
+### 23. Initialize payment (create payment record)
+POST {{base_url}}/api/payments/initialize/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "order_id": "550e8400-e29b-41d4-a716-446655440000",
+  "amount": "5999.98"
+}
+
+### 24. Get payment details
+GET {{base_url}}/api/payments/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### 25. Verify payment (webhook from Paystack)
+POST {{base_url}}/api/payments/verify/
+Content-Type: application/json
+
+{
+  "reference": "7PVNCCA60T",
+  "amount": 599998
+}
+
+### 26. Get vendor subaccount (Paystack)
+GET {{base_url}}/api/payments/vendor-subaccount/1/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### 27. Create vendor subaccount (setup Paystack payout)
+POST {{base_url}}/api/payments/vendor-subaccount/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "vendor": 1,
+  "subaccount_code": "ACCT_1a2b3c4d5e6f7g8h",
+  "percentage_charge": "98.50"
+}
+
+### ============================================
+### ADMIN / DASHBOARD
+### ============================================
+
+### 28. Get all vendors (admin)
+GET {{base_url}}/api/accounts/vendors/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### 29. Approve vendor (admin)
+PATCH {{base_url}}/api/accounts/vendors/1/approve/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "approved": true
+}
+
+### 30. Get all orders (admin - filter by vendor/status)
+GET {{base_url}}/api/orders/?vendor=1&status=pending
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
