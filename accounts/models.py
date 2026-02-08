@@ -55,7 +55,7 @@ class Vendor(models.Model):
         return super().save(*args, **kwargs)
     
     def __str__(self):
-        return self.name
+        return self.company_name
 
 class Membership(models.Model):
     ROLE_CHOICES = (
