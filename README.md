@@ -1,9 +1,5 @@
 # ALX Project Nexus - E-Commerce Platform
 
-[![CI/CD Pipeline](https://github.com/YOUR_USERNAME/alx-project-nexus/workflows/CI%2FCD%20Pipeline/badge.svg)](https://github.com/YOUR_USERNAME/alx-project-nexus/actions)
-[![Code Analysis](https://github.com/YOUR_USERNAME/alx-project-nexus/workflows/Code%20Analysis/badge.svg)](https://github.com/YOUR_USERNAME/alx-project-nexus/actions)
-[![codecov](https://codecov.io/gh/YOUR_USERNAME/alx-project-nexus/branch/main/graph/badge.svg)](https://codecov.io/gh/YOUR_USERNAME/alx-project-nexus)
-
 A comprehensive e-commerce platform built with Django REST Framework, featuring vendor management, product catalog, shopping cart, and payment integration with Paystack.
 
 ## Features
