@@ -4,12 +4,11 @@
 
 @base_url = http://localhost:8000
 admin token
-#@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzcwNTgwMTUzLCJpYXQiOjE3NzA1NzY1NTMsImp0aSI6ImI0MjkyNDlhOTRmMzRiNDJiMmI3NTZiNWIxMGIyY2JkIiwidXNlcl9pZCI6IjEiLCJlbWFpbCI6ImJyaWFub2p1bmdhM0BnbWFpbC5jb20ifQ.gqazcfmEMC-Xqgb6DyMvYp5YV9UZJqb5ZTlTQEH0MfU
-
+#@token =
 
 #user token
-@token= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzcwNTc5NzU0LCJpYXQiOjE3NzA1NzYxNTQsImp0aSI6Ijg3MDBlYjBlZmIwMjQ0MjFiMmRmNTk5NDdlYjNjNzA3IiwidXNlcl9pZCI6IjMiLCJlbWFpbCI6ImN1c3RvbWVyQGV4YW1wbGUuY29tIn0.pHdTYuRFcJg8nTvm0lCu0iGuae2zxzZsMTX37rOd95k
-@vendor_slug = techstore-inc
+@token= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzcwNjIwMDc2LCJpYXQiOjE3NzA2MTY0NzYsImp0aSI6IjIzNDQ2Y2Q4YmNkZjRkODVhZmJhNzllOTQ4MzE5MDViIiwidXNlcl9pZCI6IjciLCJlbWFpbCI6ImN1c3RvbWVyMTAwQGV4YW1wbGUuY29tIn0.ULeGaS_L0rTnvC4PJqFZYZIvNIGSVWb4voD_4GnwWIg
+@vendor_slug = wapi-homes
 
 ### ============================================
 ### ACCOUNTS & AUTHENTICATION
@@ -20,10 +19,10 @@ POST {{base_url}}/api/accounts/register/
 Content-Type: application/json
 
 {
-  "email": "customer@example.com",
-  "password": "SecurePass123!",
-  "first_name": "John",
-  "last_name": "Doe"
+  "email": "customer100@example.com",
+  "password": "SecurePass124!",
+  "first_name": "Ken",
+  "last_name": "Daniels"
 }
 
 
@@ -32,8 +31,8 @@ POST {{base_url}}/api/accounts/token/
 Content-Type: application/json
 
 {
-  "email": "customer@example.com",
-  "password": "SecurePass123!"
+  "email": "customer100@example.com",
+  "password": "SecurePass124!"
 }
 
 ### Login superuser (get JWT token)
@@ -43,7 +42,7 @@ Content-Type: application/json
 
 {
   "email": "brianojunga3@gmail.com",
-  "password": "@Myhouse12"
+  "password": "Myhouse00"
 }
 
 ###
@@ -59,7 +58,7 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "company_name": "TechStore Inc",
+  "company_name": "wapi homes",
   "address": "123 Business Street, Capital City",
   "phone_number": "+234801234567",
   "email": "vendor@techstore.com"
