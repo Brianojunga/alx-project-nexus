@@ -9,7 +9,7 @@ class PaystackService:
         self.reference = str(uuid.uuid4())
         self.base_url = 'https://api.paystack.co'
         self.headers = {
-            "Authorization": f"Bearer  {os.getenv("PAYSTACK_SECRET_KEY")}",
+            "Authorization": f"Bearer {os.getenv('PAYSTACK_SECRET_KEY')}",
             "Content-Type": "application/json"
         }
 
